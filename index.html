@@ -1,23 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greaseshield GS2000-DPF AR</title>
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
-<style>body{margin:0,font-family:system-ui,sans-serif}model-viewer{width:100vw;height:100vh;background:#fff}</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grease Shield GS 2000 DPF</title>
+
+  <!-- Model Viewer -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    header {
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #ffffff;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    header p {
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: #666;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: calc(100vh - 80px);
+      background-color: #f8f8f8;
+    }
+
+    .ar-button {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0F5F3A;
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 999px;
+      font-size: 16px;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 100;
+      cursor: pointer;
+    }
+
+    .ar-button:active {
+      transform: translateX(-50%) scale(0.98);
+    }
+  </style>
 </head>
+
 <body>
-<model-viewer src="greaseshield.glb" ios-src="GS2000.usdz" ar ar-modes="scene-viewer webxr quick-look" ar-scale="fixed" camera-controls tone-mapping="neutral" shadow-intensity="1">
-    <div class="progress-bar hide" slot="progress-bar">
-        <div class="update-bar"></div>
-    </div>
-    <button slot="ar-button" id="ar-button">
-        View in your space
-    </button>
-    <div id="ar-prompt">
-        <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
-    </div>
+
+<header>
+  <h1>Grease Shield GS 2000 DPF</h1>
+  <p>Tap below to view in AR</p>
+</header>
+
+<model-viewer
+  id="model"
+  src="greaseshield.glb"
+  ios-src="GS2000.usdz"
+  ar
+  ar-modes="webxr scene-viewer quick-look"
+  ar-scale="fixed"
+  ar-placement="floor"
+  camera-controls
+  auto-rotate
+  auto-rotate-delay="6000"
+  shadow-intensity="1"
+  shadow-softness="0.8"
+  environment-image="neutral"
+  tone-mapping="neutral">
 </model-viewer>
+
+<button class="ar-button" onclick="document.getElementById('model').activateAR()">
+  View in Your Space
+</button>
+
 </body>
 </html>
